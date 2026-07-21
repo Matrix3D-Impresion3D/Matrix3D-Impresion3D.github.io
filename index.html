@@ -705,12 +705,13 @@ const datosWeb = {
     </div>
 </section>
 
-<section id="portfolio" class="py-24 bg-gradient-to-b from-gray-950 via-gray-900 to-gray-950">
+<section id="portfolio" class="py-24 bg-gradient-to-b from-gray-950 via-gray-900 to-gray-950 relative">
     <div class="absolute inset-0 overflow-hidden pointer-events-none">
         <div class="absolute top-1/3 left-1/4 w-96 h-96 bg-lime-400/5 rounded-full blur-3xl"></div>
         <div class="absolute bottom-1/3 right-1/4 w-96 h-96 bg-orange-400/5 rounded-full blur-3xl"></div>
     </div>
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div class="text-center mb-12" data-aos="fade-up">
             <div class="inline-flex items-center px-4 py-2 rounded-full bg-lime-400/10 border border-lime-400/30 mb-4">
                 <svg class="w-4 h-4 text-lime-300 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
@@ -727,16 +728,20 @@ const datosWeb = {
             <button onclick="filterPortfolio('Arte')" id="filter-Arte" class="filter-btn px-6 py-2.5 rounded-xl font-medium transition-all duration-300 bg-gray-800/50 text-gray-400 border border-gray-700/50 hover:border-cyan-400/50 hover:text-cyan-300">Arte</button>
         </div>
         <p class="text-center text-sm text-gray-400 mb-8">← Desliza para ver más proyectos →</p>
-        <div class="relative" data-aos="fade-up" data-aos-delay="200">
-            <div id="portfolioCarousel" class="carousel-container flex gap-8 pb-4 -mx-4 px-4 sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
-                </div>
-            <button onclick="scrollCarousel('portfolioCarousel',-1)" aria-label="Ver proyectos anteriores" class="absolute left-0 top-1/2 -translate-y-1/2 w-12 h-12 bg-gray-800/90 hover:bg-cyan-500 rounded-full flex items-center justify-center z-10 transition-all duration-300 hover:scale-110 hover:shadow-lg">
-                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
-            </button>
-            <button onclick="scrollCarousel('portfolioCarousel',1)" aria-label="Ver proyectos siguientes" class="absolute right-0 top-1/2 -translate-y-1/2 w-12 h-12 bg-gray-800/90 hover:bg-cyan-500 rounded-full flex items-center justify-center z-10 transition-all duration-300 hover:scale-110 hover:shadow-lg">
-                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
-            </button>
+    </div> <!-- Aquí cerramos el contenedor -->
+
+    <!-- Carrusel FUERA del contenedor para que toque los bordes físicos del móvil -->
+    <div class="relative w-full z-10" data-aos="fade-up" data-aos-delay="200">
+        <div id="portfolioCarousel" class="carousel-container flex gap-8 pb-8 px-4 sm:px-6 lg:px-8 overflow-x-auto">
         </div>
+        
+        <!-- Botones ajustados -->
+        <button onclick="scrollCarousel('portfolioCarousel',-1)" aria-label="Ver proyectos anteriores" class="absolute left-2 top-1/2 -translate-y-1/2 w-12 h-12 bg-gray-800/90 hover:bg-cyan-500 rounded-full flex items-center justify-center z-10 transition-all duration-300 hover:scale-110 hover:shadow-lg">
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+        </button>
+        <button onclick="scrollCarousel('portfolioCarousel',1)" aria-label="Ver proyectos siguientes" class="absolute right-2 top-1/2 -translate-y-1/2 w-12 h-12 bg-gray-800/90 hover:bg-cyan-500 rounded-full flex items-center justify-center z-10 transition-all duration-300 hover:scale-110 hover:shadow-lg">
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+        </button>
     </div>
 </section>
 
@@ -891,7 +896,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Generar Productos
     const prodContainer = document.getElementById('productCarousel');
     prodContainer.innerHTML = datosWeb.productos.map(p => `
-        <div class="carousel-item flex-shrink-0 w-[90%] sm:w-[45%] lg:w-[30%] max-w-[380px] mx-auto" style="max-width: 380px;">
+      <div class="carousel-item flex-shrink-0 w-[90%] sm:w-[45%] lg:w-[30%] max-w-[380px] snap-center" style="max-width: 380px;">
             <div class="product-card bg-gray-800/50 border border-gray-700/50 rounded-2xl overflow-hidden shadow-xl w-full" style="background:linear-gradient(to bottom, ${p.colorHex} 0%, ${p.colorHex} 4px, rgba(17, 24, 39, 0.8) 4px);">
                 <div class="product-image-container relative aspect-[4/3] w-full bg-gradient-to-br from-${p.baseColor}-900/20 to-gray-900 flex items-center justify-center p-6">
                     <img src="${p.imagen}" alt="${p.nombre}" loading="lazy" class="w-full h-full object-cover drop-shadow-2xl">
@@ -912,7 +917,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Generar Portfolio
     const portContainer = document.getElementById('portfolioCarousel');
     portContainer.innerHTML = datosWeb.portfolio.map(p => `
-        <div class="carousel-item flex-shrink-0 w-[90%] sm:w-[45%] lg:w-[30%] max-w-[380px] mx-auto" data-category="${p.categoria}" style="max-width: 380px;">
+        <div class="carousel-item flex-shrink-0 w-[90%] sm:w-[45%] lg:w-[30%] max-w-[380px] snap-center" data-category="${p.categoria}" style="max-width: 380px;">
             <div class="group relative overflow-hidden rounded-2xl border border-${p.colorCSS}-400/40 bg-gray-900/50 backdrop-blur-sm hover:scale-105 transition-all duration-500 hover:shadow-${p.colorCSS}-400/40 hover:shadow-2xl w-full">
                 <div class="relative aspect-[4/3] w-full overflow-hidden bg-gradient-to-br from-gray-800 to-gray-900">
                     <img src="${p.imagen}" alt="${p.titulo}" loading="lazy" class="w-full h-full object-cover">
