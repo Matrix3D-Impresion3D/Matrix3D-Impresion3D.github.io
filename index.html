@@ -276,7 +276,7 @@
         }
     </style>
 </head>
-<body class="bg-gray-950 text-white">
+<body class="bg-gray-950 text-white overflow-x-hidden">
 
 <script>
 const datosWeb = {
@@ -441,6 +441,10 @@ const datosWeb = {
             <button onclick="scrollToSection('materiales');toggleMobileMenu()" class="block w-full text-left px-4 py-2 text-gray-300 hover:text-cyan-300 rounded transition-colors">Materiales</button>
             <button onclick="scrollToSection('portfolio');toggleMobileMenu()" class="block w-full text-left px-4 py-2 text-gray-300 hover:text-cyan-300 rounded transition-colors">Portfolio</button>
             <button onclick="scrollToSection('contacto');toggleMobileMenu()" class="block w-full text-left px-4 py-2 text-gray-300 hover:text-cyan-300 rounded transition-colors">Contacto</button>
+            
+            <div class="px-4 pt-4 border-t border-gray-800">
+                <button onclick="scrollToSection('contacto');toggleMobileMenu()" class="w-full btn-gradient text-white font-semibold px-6 py-3 rounded-lg shadow-lg hover-shine">Solicitar Presupuesto</button>
+            </div>
         </div>
     </div>
 </header>
