@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Matrix3D - Taller de impresión 3D en Colmenar Viejo, Madrid. PLA, PETG, TPU, ABS.">
-    <title>Matrix3D - Impresión 3D en Colmenar Viejo</title>  
+    <title>Matrix3D - Impresión 3D</title>  
     
     <meta property="og:site_name" content="Matrix3D" />
     <meta property="og:title" content="Matrix3D - Taller de Impresión 3D y Diseño" />
@@ -15,7 +15,7 @@
       "@context": "https://schema.org",
       "@type": "WebSite", 
       "name": "Matrix3D",
-      "url": "https://matrix3d-impresion3d.github.io/"
+      "url": "https://matrix3d.es/"
     }
     </script>  
 
@@ -396,18 +396,21 @@ const datosWeb = {
     <div class="container mx-auto px-4 sm:px-6 lg:px-8 z-10 relative">
         <div class="max-w-4xl mx-auto text-center">
             
-            <!-- Etiqueta 1: Hero -->
-            <div class="inline-flex items-center px-4 py-2 rounded-full bg-cyan-500/10 border border-cyan-500/20 mb-8" data-aos="fade-down">
+            <!-- Etiqueta 1: Hero (sin data-aos) -->
+            <div class="inline-flex items-center px-4 py-2 rounded-full bg-cyan-500/10 border border-cyan-500/20 mb-8">
                 <svg class="w-4 h-4 text-cyan-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/></svg>
                 <span class="text-cyan-400 text-sm font-medium tracking-wide">Impresión 3D y Diseño de Ideas</span>
             </div>
             
-            <h1 class="text-5xl sm:text-6xl lg:text-7xl font-bold mb-6 leading-tight" data-aos="fade-up" data-aos-delay="100">
+            <!-- Titular visible de inmediato (sin data-aos) -->
+            <h1 class="text-5xl sm:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
                 <span class="gradient-text animate-gradient">Transformamos Ideas en </span><br>
                 <span class="text-white">Objetos Físicos</span>
             </h1>
-            <p class="text-xl sm:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto leading-relaxed" data-aos="fade-up" data-aos-delay="200">Fabricación precisa con materiales técnicos avanzados. Desde prototipos hasta series de producción.</p>
-            <div class="grid grid-cols-3 gap-2 sm:gap-6 max-w-2xl mx-auto mb-12 px-1 sm:px-0" data-aos="fade-up" data-aos-delay="300">
+            <p class="text-xl sm:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto leading-relaxed">Fabricación precisa con materiales técnicos avanzados. Desde prototipos hasta series de producción.</p>
+            
+            <!-- Cifras (sin data-aos) -->
+            <div class="grid grid-cols-3 gap-2 sm:gap-6 max-w-2xl mx-auto mb-12 px-1 sm:px-0">
                 <div class="text-center">
                     <div class="text-2xl sm:text-4xl font-bold grad-cyan mb-1 sm:mb-2">10+</div>
                     <div class="text-gray-300 text-xs sm:text-base leading-tight">Materiales<br class="block sm:hidden"> Disponibles</div>
@@ -421,7 +424,9 @@ const datosWeb = {
                     <div class="text-gray-300 text-xs sm:text-base leading-tight">Precisión<br class="block sm:hidden"> Industrial</div>
                 </div>
             </div>
-            <div class="flex flex-col sm:flex-row items-center justify-center gap-4" data-aos="fade-up" data-aos-delay="400">
+            
+            <!-- Botones (sin data-aos) -->
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
                 <button onclick="scrollToSection('contacto')" class="btn-gradient text-white font-semibold px-8 py-6 text-lg rounded-xl shadow-2xl hover-shine">Solicitar Presupuesto →</button>
                 <button onclick="scrollToSection('servicios')" class="border-2 border-cyan-400/40 text-cyan-300 hover:bg-cyan-400/10 hover:border-cyan-400 px-8 py-6 text-lg rounded-xl backdrop-blur-sm transition-all duration-300 hover:scale-105">Ver Servicios</button>
             </div>
@@ -793,11 +798,7 @@ const datosWeb = {
         <div class="grid md:grid-cols-2 gap-6 items-stretch" data-aos="fade-up" data-aos-delay="200">
             
             <!-- OPCIÓN A: CON ARCHIVO (FORMULARIO DIRECTO A TU EMAIL) -->
-            <form action="https://formsubmit.co/contacto.matrix3d@gmail.com" method="POST" enctype="multipart/form-data" class="relative group block h-full">
-                
-                <input type="hidden" name="_subject" value="¡Nuevo archivo 3D recibido desde la Web!">
-                <input type="hidden" name="_captcha" value="false">
-                <input type="hidden" name="_next" value="https://matrix3d-impresion3d.github.io/">
+            <form id="form-archivo" class="relative group block h-full">
 
                 <div style="border-radius: 28px;" class="border-2 border-dashed border-cyan-500/50 hover:border-cyan-400 bg-[#14171f] hover:bg-[#1a1f2c] p-8 sm:p-10 transition-all duration-300 shadow-2xl relative overflow-hidden h-full flex flex-col justify-between">
                     
@@ -1101,5 +1102,44 @@ window.addEventListener('scroll',()=>{
 });
 </script>
 
+    <script>
+document.getElementById('form-archivo').addEventListener('submit', function(e) {
+    // 1. ESTO ES LO MÁS IMPORTANTE: Evita que la página salte a otro sitio
+    e.preventDefault(); 
+
+    const formData = new FormData(this);
+    const btn = this.querySelector('button[type="submit"]');
+    const textoOriginal = btn.innerHTML;
+    
+    // 2. Damos feedback al cliente cambiando el texto del botón
+    btn.innerHTML = 'Enviando archivo de forma segura...'; 
+    btn.disabled = true;
+
+    // 3. Enviamos el archivo por la puerta de atrás (ruta /ajax/) a tu Gmail
+    fetch("https://formsubmit.co/ajax/contacto.matrix3d@gmail.com", {
+        method: "POST",
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        if(data.success) {
+            // 4. Mensaje de éxito en tu propia web sin cambiar de página
+            alert('¡Archivo enviado con éxito a Matrix3D! Lo revisaremos y te responderemos con el presupuesto.');
+            this.reset(); // Limpia el recuadro para que quede vacío de nuevo
+        } else {
+            alert('Hubo un problema al enviar el archivo. Por favor, inténtalo de nuevo.');
+        }
+    })
+    .catch(error => {
+        alert('Error de conexión. Revisa tu internet.');
+    })
+    .finally(() => {
+        // 5. Devolvemos el botón a la normalidad
+        btn.innerHTML = textoOriginal;
+        btn.disabled = false;
+    });
+});
+</script>
+    
 </body>
 </html>
