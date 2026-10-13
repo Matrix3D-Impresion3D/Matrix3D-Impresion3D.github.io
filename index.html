@@ -798,7 +798,7 @@ const datosWeb = {
         <div class="grid md:grid-cols-2 gap-6 items-stretch" data-aos="fade-up" data-aos-delay="200">
             
             <!-- OPCIÓN A: CON ARCHIVO (FORMULARIO DIRECTO A TU EMAIL) -->
-            <form id="form-archivo" class="relative group block h-full">
+            <form id="form-archivo" enctype="multipart/form-data" class="relative group block h-full">
 
                 <div style="border-radius: 28px;" class="border-2 border-dashed border-cyan-500/50 hover:border-cyan-400 bg-[#14171f] hover:bg-[#1a1f2c] p-8 sm:p-10 transition-all duration-300 shadow-2xl relative overflow-hidden h-full flex flex-col justify-between">
                     
@@ -1102,44 +1102,42 @@ window.addEventListener('scroll',()=>{
 });
 </script>
 
-    <script>
+<script>
 document.getElementById('form-archivo').addEventListener('submit', function(e) {
-    // 1. ESTO ES LO MÁS IMPORTANTE: Evita que la página salte a otro sitio
     e.preventDefault(); 
 
     const formData = new FormData(this);
     const btn = this.querySelector('button[type="submit"]');
     const textoOriginal = btn.innerHTML;
     
-    // 2. Damos feedback al cliente cambiando el texto del botón
-    btn.innerHTML = 'Enviando archivo de forma segura...'; 
+    btn.innerHTML = 'Enviando archivo seguro...'; 
     btn.disabled = true;
 
-    // 3. Enviamos el archivo por la puerta de atrás (ruta /ajax/) a tu Gmail
-    fetch("https://formsubmit.co/ajax/contacto.matrix3d@gmail.com", {
+    // Enviamos a la ruta original, solicitando confirmación invisible
+    fetch("https://formsubmit.co/contacto.matrix3d@gmail.com", {
         method: "POST",
+        headers: {
+            'Accept': 'application/json'
+        },
         body: formData
     })
-    .then(response => response.json())
-    .then(data => {
-        if(data.success) {
-            // 4. Mensaje de éxito en tu propia web sin cambiar de página
-            alert('¡Archivo enviado con éxito a Matrix3D! Lo revisaremos y te responderemos con el presupuesto.');
-            this.reset(); // Limpia el recuadro para que quede vacío de nuevo
+    .then(response => {
+        if(response.ok) {
+            alert('¡Archivo enviado con éxito a Matrix3D!');
+            document.getElementById('form-archivo').reset(); 
         } else {
-            alert('Hubo un problema al enviar el archivo. Por favor, inténtalo de nuevo.');
+            alert('Hubo un error. Comprueba que el archivo pesa menos de 10 MB.');
         }
     })
     .catch(error => {
-        alert('Error de conexión. Revisa tu internet.');
+        alert('Error de conexión. Revisa tu internet o el tamaño del archivo.');
     })
     .finally(() => {
-        // 5. Devolvemos el botón a la normalidad
         btn.innerHTML = textoOriginal;
         btn.disabled = false;
     });
 });
-</script>
+</script>   
     
 </body>
 </html>
