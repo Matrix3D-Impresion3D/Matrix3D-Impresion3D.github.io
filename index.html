@@ -1106,38 +1106,55 @@ window.addEventListener('scroll',()=>{
 document.getElementById('form-archivo').addEventListener('submit', function(e) {
     e.preventDefault(); 
 
+    // 1. FILTRO DE SEGURIDAD EN NAVEGADOR (Extensión y Tamaño)
+    const inputArchivo = this.querySelector('input[type="file"]');
+    if (inputArchivo && inputArchivo.files.length > 0) {
+        const archivo = inputArchivo.files[0];
+        const maxMB = 50; // Límite de 50 MB para no saturar la RAM del NAS
+        const extensionesPermitidas = ['.stl', '.obj', '.3mf', '.step', '.stp', '.zip', '.rar'];
+        
+        const nombreArchivo = archivo.name.toLowerCase();
+        const esExtensionValida = extensionesPermitidas.some(ext => nombreArchivo.endsWith(ext));
+
+        if (!esExtensionValida) {
+            alert('Por seguridad, solo aceptamos archivos 3D (.STL, .OBJ, .3MF, .STEP) o comprimidos (.ZIP).');
+            return;
+        }
+
+        if (archivo.size > maxMB * 1024 * 1024) {
+            alert('El archivo es demasiado grande (Máximo ' + maxMB + ' MB).');
+            return;
+        }
+    }
+
     const formData = new FormData(this);
     const btn = this.querySelector('button[type="submit"]');
     const textoOriginal = btn.innerHTML;
     
-    btn.innerHTML = 'Enviando archivo seguro...'; 
+    btn.innerHTML = 'Analizando y subiendo a Matrix3D...'; 
     btn.disabled = true;
 
-    // Enviamos a la ruta original, solicitando confirmación invisible
-    fetch("https://formsubmit.co/contacto.matrix3d@gmail.com", {
+    fetch("https://dxp2800-958d.tail66066e.ts.net/webhook/presupuestos-3d", {
         method: "POST",
-        headers: {
-            'Accept': 'application/json'
-        },
         body: formData
     })
     .then(response => {
         if(response.ok) {
-            alert('¡Archivo enviado con éxito a Matrix3D!');
+            alert('¡Archivo recibido y verificado con éxito! Lo revisaremos y te escribiremos pronto.');
             document.getElementById('form-archivo').reset(); 
         } else {
-            alert('Hubo un error. Comprueba que el archivo pesa menos de 10 MB.');
+            alert('El servidor rechazó el archivo o hubo un error de comunicación.');
         }
     })
     .catch(error => {
-        alert('Error de conexión. Revisa tu internet o el tamaño del archivo.');
+        alert('Error de red al intentar subir el archivo.');
     })
     .finally(() => {
         btn.innerHTML = textoOriginal;
         btn.disabled = false;
     });
 });
-</script>   
+</script>
     
 </body>
 </html>
