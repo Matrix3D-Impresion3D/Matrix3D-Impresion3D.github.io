@@ -1112,26 +1112,11 @@ document.getElementById('form-imagenes').addEventListener('submit', async functi
 
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
+document.addEventListener("DOMContentLoaded", () => {
     
     // Generar Portfolio
-document.addEventListener("DOMContentLoaded", async () => {
     const portContainer = document.getElementById('portfolioCarousel');
-    let listaPortfolio = datosWeb.portfolio; // Respaldo por si falla el JSON
-
-    // 1. Intentamos cargar el portfolio.json que actualiza n8n
-    try {
-        const respuesta = await fetch('portfolio.json?t=' + new Date().getTime());
-        if (respuesta.ok) {
-            const datosJson = await respuesta.json();
-            // Compatible tanto si el JSON es un Array directo [...] como si es { "portfolio": [...] }
-            listaPortfolio = Array.isArray(datosJson) ? datosJson : (datosJson.portfolio || datosWeb.portfolio);
-        }
-    } catch (error) {
-        console.warn("Usando portfolio local de respaldo:", error);
-    }
-
-    // 2. Pintamos el Portfolio
-    portContainer.innerHTML = listaPortfolio.map(p => `
+    portContainer.innerHTML = datosWeb.portfolio.map(p => `
         <div class="carousel-item flex-shrink-0 w-[90%] sm:w-[45%] lg:w-[30%] mx-auto snap-center" data-category="${p.categoria}" style="max-width: 380px;">
             <div class="group relative overflow-hidden rounded-2xl border border-${p.colorCSS}-400/40 bg-gray-900/50 backdrop-blur-sm hover:scale-105 transition-all duration-500 hover:shadow-${p.colorCSS}-400/40 hover:shadow-2xl w-full">
                 <div class="relative aspect-[4/3] w-full overflow-hidden bg-gradient-to-br from-gray-800 to-gray-900">
@@ -1152,58 +1137,6 @@ document.addEventListener("DOMContentLoaded", async () => {
             </div>
         </div>
     `).join('');
-
-    // 3. Generar Reseñas
-    const revContainer = document.getElementById('reviewsContainer');
-    const stars = `<svg class="w-5 h-5 fill-yellow-400" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>`.repeat(5);
-    const colorCombos = ["bg-avatar-1", "bg-avatar-2", "bg-avatar-3", "bg-avatar-4", "bg-avatar-5"];
-    
-    revContainer.innerHTML = datosWeb.resenas.map((r, i) => `
-        <div class="bg-white rounded-2xl p-6 card-hover flex flex-col justify-between h-full" data-aos="fade-up" data-aos-delay="${100 + (i*100)}">
-            <div>
-                <div class="flex items-center gap-3 mb-4">
-                    <div class="w-12 h-12 rounded-full ${colorCombos[i % colorCombos.length]} flex items-center justify-center text-white font-bold flex-shrink-0">${r.inicial}</div>
-                    <div>
-                        <h3 class="text-gray-900 font-semibold leading-snug">${r.nombre}</h3>
-                        <p class="text-gray-500 text-xs">${r.fecha}</p>
-                    </div>
-                </div>
-                <div class="flex gap-1 mb-3">${stars}</div>
-                <p class="text-gray-700 text-sm leading-relaxed">${r.texto}</p>
-            </div>
-        </div>
-    `).join('');
-
-    // 4. Iniciar animaciones y forzar recálculo de pantalla
-    if (typeof AOS !== 'undefined') {
-        AOS.init({ duration: 800, easing: 'ease-in-out', once: true, offset: 50 });
-        setTimeout(() => AOS.refresh(), 300);
-    }
-});
-
-    // Generar Reseñas unificadas y simétricas
-    const revContainer = document.getElementById('reviewsContainer');
-    const stars = `<svg class="w-5 h-5 fill-yellow-400" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>`.repeat(5);
-    const colorCombos = ["bg-avatar-1", "bg-avatar-2", "bg-avatar-3", "bg-avatar-4", "bg-avatar-5"];
-    
-    revContainer.innerHTML = datosWeb.resenas.map((r, i) => `
-        <div class="bg-white rounded-2xl p-6 card-hover flex flex-col justify-between h-full" data-aos="fade-up" data-aos-delay="${100 + (i*100)}">
-            <div>
-                <div class="flex items-center gap-3 mb-4">
-                    <div class="w-12 h-12 rounded-full ${colorCombos[i]} flex items-center justify-center text-white font-bold flex-shrink-0">${r.inicial}</div>
-                    <div>
-                        <h3 class="text-gray-900 font-semibold leading-snug">${r.nombre}</h3>
-                        <p class="text-gray-500 text-xs">${r.fecha}</p>
-                    </div>
-                </div>
-                <div class="flex gap-1 mb-3">${stars}</div>
-                <p class="text-gray-700 text-sm leading-relaxed">${r.texto}</p>
-            </div>
-        </div>
-    `).join('');
-
-    AOS.init({ duration: 800, easing: 'ease-in-out', once: true, offset: 100 });
-});
 
     // Generar Reseñas unificadas y simétricas
     const revContainer = document.getElementById('reviewsContainer');
