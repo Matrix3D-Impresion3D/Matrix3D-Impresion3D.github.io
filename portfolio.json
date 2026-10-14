@@ -12,12 +12,5 @@
     "material": "PLA",
     "categoria": "Maquetas",
     "colorCSS": "cyan"
-  },
-  {
-    "imagen": "img/Maqueta_PLA_Singapur.webp",
-    "titulo": "Singapur",
-    "material": "PLA",
-    "categoria": "Maquetas",
-    "colorCSS": "cyan"
   }
 ]
