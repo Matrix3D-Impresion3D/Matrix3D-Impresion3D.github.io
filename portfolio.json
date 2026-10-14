@@ -1,5 +1,12 @@
 [
   {
+    "imagen": "img/Hogar_PLA_Cabeza Dragon Decoracion.webp",
+    "titulo": "Cabeza Dragon Decoracion",
+    "material": "PLA",
+    "categoria": "Hogar",
+    "colorCSS": "lime"
+  },
+  {
     "imagen": "img/Personalizado_PETG_LLavero.webp",
     "titulo": "LLavero",
     "material": "PETG",
