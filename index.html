@@ -55,28 +55,20 @@
         ::-webkit-scrollbar-track{background:#0a0a0a}
         ::-webkit-scrollbar-thumb{background:linear-gradient(180deg,#06b6d4,#f97316);border-radius:5px}
         
-       .carousel-container {
+.carousel-container {
     overflow-x: auto;
     scroll-behavior: smooth;
     scrollbar-width: none;
     -ms-overflow-style: none;
     scroll-snap-type: x mandatory;
-    padding-left: 3.5rem !important;
-    padding-right: 2rem !important;
-}
-@media (min-width: 640px) {
-    .carousel-container {
-        padding-left: 5rem !important;
-        padding-right: 5rem !important;
-    }
+    padding-left: 60px !important;
+    padding-right: 60px !important;
+    scroll-padding-left: 60px;
 }
 .carousel-container::-webkit-scrollbar { display: none; }
-.carousel-item { scroll-snap-align: center; }
-@media (min-width: 640px) {
-    .carousel-item { scroll-snap-align: start; }
-}
+.carousel-item { scroll-snap-align: start; }
 
-/* Visor flotante por encima de TODO */
+/* Visor flotante al hacer clic (con el mismo estilo original de tus tarjetas) */
 #imageLightbox {
     position: fixed;
     top: 0;
@@ -86,7 +78,7 @@
     background-color: rgba(3, 7, 18, 0.85);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
-    z-index: 99999 !important; /* Garantiza que esté por delante de todo */
+    z-index: 99999 !important;
     display: none;
     align-items: center;
     justify-content: center;
@@ -99,15 +91,13 @@
     opacity: 1;
 }
 .lightbox-card {
-    background: #111827;
-    border: 1px solid rgba(6, 182, 212, 0.35);
-    border-radius: 20px;
-    padding: 16px;
-    max-width: 520px; /* Tamaño medio elegante, no ocupa toda la pantalla */
+    background: #0f172a;
+    border: 1px solid rgba(34, 211, 238, 0.4);
+    border-radius: 16px;
+    max-width: 500px;
     width: 92%;
     box-shadow: 0 25px 60px rgba(0, 0, 0, 0.9);
-    position: relative;
-    text-align: center;
+    overflow: hidden;
     transform: scale(0.95);
     transition: transform 0.25s ease;
 }
@@ -116,10 +106,10 @@
 }
 .lightbox-card img {
     width: 100%;
-    max-height: 55vh; /* Altura controlada para que se vea entera y proporcionada */
+    max-height: 60vh;
     object-fit: contain;
-    border-radius: 12px;
-    background: #090d16;
+    background: #030712;
+    display: block;
 }
         
         .mobile-menu{display:none}
@@ -1158,13 +1148,19 @@ document.getElementById('form-imagenes').addEventListener('submit', async functi
     </div>
 </footer> 
 
-<!-- VISOR FLOTANTE CENTRADO -->
+<!-- VISOR FLOTANTE CON EL DISEÑO ORIGINAL DE TUS TARJETAS -->
 <div id="imageLightbox" onclick="closeLightbox()">
     <div class="lightbox-card" onclick="event.stopPropagation()">
         <img id="lightboxImg" src="" alt="">
-        <div class="mt-4 flex items-center justify-between px-2">
-            <h4 id="lightboxTitle" class="text-lg font-bold text-white"></h4>
-            <span id="lightboxMaterial" class="text-xs font-semibold text-cyan-300 bg-cyan-500/10 border border-cyan-500/30 px-3 py-1 rounded-full"></span>
+        <div class="p-6 bg-gray-900">
+            <h3 id="lightboxTitle" class="text-xl font-bold text-white mb-2"></h3>
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-2">
+                    <svg class="w-4 h-4 text-cyan-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/></svg>
+                    <span id="lightboxMaterial" class="text-sm text-gray-400"></span>
+                </div>
+                <div class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></div>
+            </div>
         </div>
     </div>
 </div>
@@ -1184,20 +1180,26 @@ document.getElementById('form-imagenes').addEventListener('submit', async functi
     <script>
 document.addEventListener("DOMContentLoaded", () => {
     
-   // 1. Función que dibuja las tarjetas del Portfolio (Diseño limpio original + clic para abrir)
+   // 1. Función que dibuja las tarjetas del Portfolio (100% DISEÑO ORIGINAL)
     const portContainer = document.getElementById('portfolioCarousel');
     function pintarPortfolio(lista) {
         portContainer.innerHTML = lista.map(p => `
-            <div class="carousel-item flex-shrink-0 w-[85%] sm:w-[45%] lg:w-[30%]" data-category="${p.categoria}" style="max-width: 360px;">
+            <div class="carousel-item flex-shrink-0 w-[90%] sm:w-[45%] lg:w-[30%]" data-category="${p.categoria}" style="max-width: 380px;">
                 <div onclick="openLightbox('${p.imagen}', '${p.titulo}', '${p.material}')" class="cursor-pointer group relative overflow-hidden rounded-2xl border border-${p.colorCSS}-400/40 bg-gray-900/50 backdrop-blur-sm hover:scale-105 transition-all duration-500 hover:shadow-${p.colorCSS}-400/40 hover:shadow-2xl w-full">
                     <div class="relative aspect-[4/3] w-full overflow-hidden bg-gradient-to-br from-gray-800 to-gray-900">
-                        <img src="${p.imagen}" alt="${p.titulo}" loading="lazy" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                        <div class="absolute inset-0 bg-gradient-to-t from-gray-950 via-gray-950/20 to-transparent opacity-60"></div>
-                        <div class="absolute top-4 right-4 px-3 py-1 rounded-full bg-gray-950/80 backdrop-blur-sm border border-${p.colorCSS}-400/40 text-xs font-semibold text-${p.colorCSS}-300">${p.categoria}</div>
+                        <img src="${p.imagen}" alt="${p.titulo}" loading="lazy" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-gray-950 via-gray-950/60 to-transparent opacity-80"></div>
+                        <div class="absolute top-4 right-4 px-3 py-1 rounded-full bg-${p.colorCSS}-400/20 backdrop-blur-sm border border-${p.colorCSS}-400/40 text-xs font-semibold text-${p.colorCSS}-300">${p.categoria}</div>
                     </div>
-                    <div class="p-5 flex items-center justify-between bg-gray-950/60">
-                        <h3 class="text-lg font-bold text-white truncate pr-2">${p.titulo}</h3>
-                        <span class="px-2.5 py-1 rounded-lg bg-gray-800/90 border border-gray-700 text-xs font-mono text-${p.colorCSS}-300 flex-shrink-0">${p.material}</span>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-white mb-2">${p.titulo}</h3>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-2">
+                                <svg class="w-4 h-4 text-${p.colorCSS}-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/></svg>
+                                <span class="text-sm text-gray-400">${p.material}</span>
+                            </div>
+                            <div class="w-2 h-2 rounded-full bg-gradient-to-r from-${p.colorCSS}-400 to-${p.colorCSS}-600 animate-pulse"></div>
+                        </div>
                     </div>
                 </div>
             </div>
