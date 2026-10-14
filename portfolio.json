@@ -1,5 +1,26 @@
 [
   {
+    "imagen": "img/Personalizado_TPU_Funda Gafas.webp",
+    "titulo": "Funda Gafas",
+    "material": "TPU",
+    "categoria": "Personalizado",
+    "colorCSS": "purple"
+  },
+  {
+    "imagen": "img/Personalizado_PETG_Pieza Nevera.webp",
+    "titulo": "Pieza Nevera",
+    "material": "PETG",
+    "categoria": "Personalizado",
+    "colorCSS": "purple"
+  },
+  {
+    "imagen": "img/Ingenería_PETG_Walkie Talkie Seguridad.webp",
+    "titulo": "Walkie Talkie Seguridad",
+    "material": "PETG",
+    "categoria": "Ingeniería",
+    "colorCSS": "cyan"
+  },
+  {
     "imagen": "img/Hogar_PLA_Organizador Personalizado..webp",
     "titulo": "Organizador Personalizado.",
     "material": "PLA",
