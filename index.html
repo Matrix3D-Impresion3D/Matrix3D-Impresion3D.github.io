@@ -1111,34 +1111,50 @@ document.getElementById('form-imagenes').addEventListener('submit', async functi
 </div>
 
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<script>
+
+    <script>
 document.addEventListener("DOMContentLoaded", () => {
     
-    // Generar Portfolio
+    // 1. Función que dibuja las tarjetas del Portfolio
     const portContainer = document.getElementById('portfolioCarousel');
-    portContainer.innerHTML = datosWeb.portfolio.map(p => `
-        <div class="carousel-item flex-shrink-0 w-[90%] sm:w-[45%] lg:w-[30%] mx-auto snap-center" data-category="${p.categoria}" style="max-width: 380px;">
-            <div class="group relative overflow-hidden rounded-2xl border border-${p.colorCSS}-400/40 bg-gray-900/50 backdrop-blur-sm hover:scale-105 transition-all duration-500 hover:shadow-${p.colorCSS}-400/40 hover:shadow-2xl w-full">
-                <div class="relative aspect-[4/3] w-full overflow-hidden bg-gradient-to-br from-gray-800 to-gray-900">
-                    <img src="${p.imagen}" alt="${p.titulo}" loading="lazy" class="w-full h-full object-cover">
-                    <div class="absolute inset-0 bg-gradient-to-t from-gray-950 via-gray-950/60 to-transparent opacity-80"></div>
-                    <div class="absolute top-4 right-4 px-3 py-1 rounded-full bg-${p.colorCSS}-400/20 backdrop-blur-sm border border-${p.colorCSS}-400/40 text-xs font-semibold text-${p.colorCSS}-300">${p.categoria}</div>
-                </div>
-                <div class="p-6">
-                    <h3 class="text-xl font-bold text-white mb-2">${p.titulo}</h3>
-                    <div class="flex items-center justify-between">
-                        <div class="flex items-center space-x-2">
-                            <svg class="w-4 h-4 text-${p.colorCSS}-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/></svg>
-                            <span class="text-sm text-gray-400">${p.material}</span>
+    function pintarPortfolio(lista) {
+        portContainer.innerHTML = lista.map(p => `
+            <div class="carousel-item flex-shrink-0 w-[90%] sm:w-[45%] lg:w-[30%] mx-auto snap-center" data-category="${p.categoria}" style="max-width: 380px;">
+                <div class="group relative overflow-hidden rounded-2xl border border-${p.colorCSS}-400/40 bg-gray-900/50 backdrop-blur-sm hover:scale-105 transition-all duration-500 hover:shadow-${p.colorCSS}-400/40 hover:shadow-2xl w-full">
+                    <div class="relative aspect-[4/3] w-full overflow-hidden bg-gradient-to-br from-gray-800 to-gray-900">
+                        <img src="${p.imagen}" alt="${p.titulo}" loading="lazy" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-gray-950 via-gray-950/60 to-transparent opacity-80"></div>
+                        <div class="absolute top-4 right-4 px-3 py-1 rounded-full bg-${p.colorCSS}-400/20 backdrop-blur-sm border border-${p.colorCSS}-400/40 text-xs font-semibold text-${p.colorCSS}-300">${p.categoria}</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-white mb-2">${p.titulo}</h3>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-2">
+                                <svg class="w-4 h-4 text-${p.colorCSS}-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/></svg>
+                                <span class="text-sm text-gray-400">${p.material}</span>
+                            </div>
+                            <div class="w-2 h-2 rounded-full bg-gradient-to-r from-${p.colorCSS}-400 to-${p.colorCSS}-600 animate-pulse"></div>
                         </div>
-                        <div class="w-2 h-2 rounded-full bg-gradient-to-r from-${p.colorCSS}-400 to-${p.colorCSS}-600 animate-pulse"></div>
                     </div>
                 </div>
             </div>
-        </div>
-    `).join('');
+        `).join('');
+    }
 
-    // Generar Reseñas unificadas y simétricas
+    // Pintamos primero las de por defecto al instante
+    pintarPortfolio(datosWeb.portfolio);
+
+    // Cargamos portfolio.json desde GitHub si existe
+    fetch('portfolio.json?v=' + Date.now())
+        .then(res => res.ok ? res.json() : Promise.reject())
+        .then(data => {
+            if (Array.isArray(data) && data.length > 0) {
+                pintarPortfolio(data);
+            }
+        })
+        .catch(() => console.log('Mostrando portfolio base'));
+
+    // 2. Generar Reseñas unificadas y simétricas
     const revContainer = document.getElementById('reviewsContainer');
     const stars = `<svg class="w-5 h-5 fill-yellow-400" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>`.repeat(5);
     const colorCombos = ["bg-avatar-1", "bg-avatar-2", "bg-avatar-3", "bg-avatar-4", "bg-avatar-5"];
@@ -1175,21 +1191,13 @@ function openWhatsApp(msg){ window.open('https://wa.me/34644382702?text='+encode
 function handleFileSelection(input) {
     if (input.files && input.files[0]) {
         const fileName = input.files[0].name;
-        // Creamos el mensaje predeterminado
         const msg = `¡Hola! Quiero solicitar un presupuesto de impresión para el archivo: "${fileName}". Te lo adjunto por aquí a continuación...`;
-        
-        // 1. Avisamos al usuario de que tiene que adjuntarlo a mano (obligación técnica de WhatsApp)
         alert(`¡Importante!\n\nPor privacidad, WhatsApp no permite auto-adjuntar archivos desde las webs.\n\nSerás redirigido al chat: por favor, ADJUNTA MANUALMENTE el archivo "${fileName}" en la conversación para que podamos verlo.`);
-        
-        // 2. Abrimos WhatsApp
         window.open('https://wa.me/34644382702?text=' + encodeURIComponent(msg), '_blank');
-        
-        // 3. Limpiamos el input para que pueda subir el mismo archivo otra vez si se equivoca
         input.value = ""; 
     }
 }
 
-// NUEVA FUNCIÓN: Para los que pulsan el recuadro Verde (No tienen STL)
 window.addEventListener('scroll',()=>{
     const btn=document.getElementById('whatsappButton');
     btn.style.opacity = window.scrollY>300 ? '1' : '0';
