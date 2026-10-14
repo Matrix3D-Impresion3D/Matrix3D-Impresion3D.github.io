@@ -1,5 +1,12 @@
 [
   {
+    "imagen": "img/Hogar_PLA_Organizador Personalizado..webp",
+    "titulo": "Organizador Personalizado.",
+    "material": "PLA",
+    "categoria": "Hogar",
+    "colorCSS": "lime"
+  },
+  {
     "imagen": "img/Hogar_PETG_Accesorios Dyson.webp",
     "titulo": "Accesorios Dyson",
     "material": "PETG",
