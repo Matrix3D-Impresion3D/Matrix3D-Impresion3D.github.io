@@ -1,5 +1,12 @@
 [
   {
+    "imagen": "img/Personalizado_PETG_LLavero.webp",
+    "titulo": "LLavero",
+    "material": "PETG",
+    "categoria": "Personalizado",
+    "colorCSS": "purple"
+  },
+  {
     "imagen": "img/Maqueta_PLA_Singapur.webp",
     "titulo": "Singapur",
     "material": "PLA",
