@@ -1,5 +1,12 @@
 [
   {
+    "imagen": "img/Maqueta_PLA_Edificio.webp",
+    "titulo": "Edificio",
+    "material": "PLA",
+    "categoria": "Maquetas",
+    "colorCSS": "cyan"
+  },
+  {
     "imagen": "img/Maqueta_PLA_Roma.webp",
     "titulo": "Roma",
     "material": "PLA",
