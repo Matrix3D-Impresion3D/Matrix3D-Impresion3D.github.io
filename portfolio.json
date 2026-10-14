@@ -1,9 +1,9 @@
 [
   {
-    "imagen": "img/Ingeneria_PLA_.Maqueta Singapur.webp",
-    "titulo": ".Maqueta Singapur",
+    "imagen": "img/Maqueta_PLA_Singapur.webp",
+    "titulo": "Singapur",
     "material": "PLA",
-    "categoria": "Ingeniería",
+    "categoria": "Maquetas",
     "colorCSS": "cyan"
   }
 ]
