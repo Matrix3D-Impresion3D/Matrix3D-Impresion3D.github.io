@@ -1,0 +1,51 @@
+[
+  {
+    "imagen": "img/diseno3dbueno.webp",
+    "titulo": "Diseño 3D",
+    "material": "PETG",
+    "categoria": "Ingeniería",
+    "colorCSS": "cyan"
+  },
+  {
+    "imagen": "img/edificioe3.webp",
+    "titulo": "Maquetas",
+    "material": "PLA",
+    "categoria": "Ingeniería",
+    "colorCSS": "orange"
+  },
+  {
+    "imagen": "img/felixble.webp",
+    "titulo": "Flexible",
+    "material": "TPU",
+    "categoria": "Industrial",
+    "colorCSS": "lime"
+  },
+  {
+    "imagen": "img/bici.webp",
+    "titulo": "Soportes a medida",
+    "material": "PETG",
+    "categoria": "Diseño",
+    "colorCSS": "purple"
+  },
+  {
+    "imagen": "img/muro.webp",
+    "titulo": "Organizador",
+    "material": "PLA",
+    "categoria": "Diseño",
+    "colorCSS": "red"
+  },
+  {
+    "imagen": "img/dragon.webp",
+    "titulo": "Diseño",
+    "material": "PLA",
+    "categoria": "Diseño",
+    "colorCSS": "blue"
+  },
+  {
+    "imagen": "img/maceta feliz.webp",
+    "titulo": "Maceta",
+    "material": "PETG",
+    "categoria": "Arte",
+    "colorCSS": "purple"
+  }
+]
