@@ -1,24 +1,17 @@
 [
   {
-    "imagen": "img/Personalizado_PETG_LLavero Buceo.webp",
-    "titulo": "LLavero Buceo",
-    "material": "PETG",
-    "categoria": "Personalizado",
-    "colorCSS": "purple"
-  },
-  {
-    "imagen": "img/Diseno 3D_PETG_Soporte Muro.webp",
-    "titulo": "Soporte Muro",
-    "material": "PETG",
-    "categoria": "Diseño 3D",
-    "colorCSS": "orange"
-  },
-  {
     "imagen": "img/Diseno 3D_PETG_LogoAviacion.webp",
     "titulo": "LogoAviacion",
     "material": "PETG",
     "categoria": "Diseño 3D",
     "colorCSS": "orange"
+  },
+    {
+    "imagen": "img/Hogar_PLA_Organizador Personalizado..webp",
+    "titulo": "Organizador Personalizado.",
+    "material": "PLA",
+    "categoria": "Hogar",
+    "colorCSS": "lime"
   },
   {
     "imagen": "img/Diseno 3D _PETG_LLavero.webp",
@@ -41,26 +34,26 @@
     "categoria": "Personalizado",
     "colorCSS": "purple"
   },
+    {
+    "imagen": "img/Hogar_PETG_Accesorios Dyson.webp",
+    "titulo": "Accesorios Dyson",
+    "material": "PETG",
+    "categoria": "Hogar",
+    "colorCSS": "lime"
+  },
+   {
+    "imagen": "img/Maqueta_PLA_Singapur.webp",
+    "titulo": "Singapur",
+    "material": "PLA",
+    "categoria": "Maquetas",
+    "colorCSS": "cyan"
+  },
   {
     "imagen": "img/Ingenería_PETG_Walkie Talkie Seguridad.webp",
     "titulo": "Walkie Talkie Seguridad",
     "material": "PETG",
     "categoria": "Ingeniería",
     "colorCSS": "cyan"
-  },
-  {
-    "imagen": "img/Hogar_PLA_Organizador Personalizado..webp",
-    "titulo": "Organizador Personalizado.",
-    "material": "PLA",
-    "categoria": "Hogar",
-    "colorCSS": "lime"
-  },
-  {
-    "imagen": "img/Hogar_PETG_Accesorios Dyson.webp",
-    "titulo": "Accesorios Dyson",
-    "material": "PETG",
-    "categoria": "Hogar",
-    "colorCSS": "lime"
   },
   {
     "imagen": "img/Hogar_PLA_Cabeza Dragon Decoracion.webp",
@@ -77,18 +70,18 @@
     "colorCSS": "orange"
   },
   {
-    "imagen": "img/Maqueta_PLA_Singapur.webp",
-    "titulo": "Singapur",
-    "material": "PLA",
-    "categoria": "Maquetas",
-    "colorCSS": "cyan"
-  },
-  {
     "imagen": "img/Maqueta_PLA_Edificio.webp",
     "titulo": "Edificio",
     "material": "PLA",
     "categoria": "Maquetas",
     "colorCSS": "cyan"
+  },
+   {
+    "imagen": "img/Personalizado_PETG_LLavero Buceo.webp",
+    "titulo": "LLavero Buceo",
+    "material": "PETG",
+    "categoria": "Personalizado",
+    "colorCSS": "purple"
   },
   {
     "imagen": "img/Maqueta_PLA_Roma.webp",
@@ -96,5 +89,12 @@
     "material": "PLA",
     "categoria": "Maquetas",
     "colorCSS": "cyan"
+  },
+    {
+    "imagen": "img/Diseno 3D_PETG_Soporte Muro.webp",
+    "titulo": "Soporte Muro",
+    "material": "PETG",
+    "categoria": "Diseño 3D",
+    "colorCSS": "orange"
   }
 ]
