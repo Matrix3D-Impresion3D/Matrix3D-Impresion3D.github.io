@@ -7,7 +7,7 @@
     <title>Matrix3D - Impresión 3D</title>  
     
     <meta property="og:site_name" content="Matrix3D" />
-    <meta property="og:title" content="Matrix3D - Taller de Impresión 3D y Diseño" />
+    <meta property="og:title" content="Matrix3D - Taller de Impresión 3D y Diseño 3D" />
     <meta property="og:description" content="Fabricación precisa con materiales técnicos en Colmenar Viejo. Prototipos, series cortas y diseño." />
     <meta property="og:image" content="https://matrix3d-impresion3d.github.io/img/impresion-pro.webp" />
     <script type="application/ld+json">
@@ -226,35 +226,35 @@ const datosWeb = {
             imagen: "img/felixble.webp",
             titulo: "Flexible", 
             material: "TPU", 
-            categoria: "Industrial",
+            categoria: "Diseño 3D",
             colorCSS: "lime"
         },
         { 
             imagen: "img/bici.webp",
             titulo: "Soportes a medida", 
             material: "PETG", 
-            categoria: "Diseño",
+            categoria: "Personalizado",
             colorCSS: "purple"
         },
         { 
             imagen: "img/muro.webp",
             titulo: "Organizador", 
             material: "PLA", 
-            categoria: "Diseño",
+            categoria: "Personalizado",
             colorCSS: "red"
         },
         { 
             imagen: "img/dragon.webp",
-            titulo: "Diseño", 
+            titulo: "Personalizado", 
             material: "PLA", 
-            categoria: "Diseño",
+            categoria: "Personalizado",
             colorCSS: "blue"
         },
         { 
             imagen: "img/maceta feliz.webp",
             titulo: "Maceta", 
             material: "PETG", 
-            categoria: "Arte",
+            categoria: "Hogar",
             colorCSS: "purple"
         }
     ],
@@ -421,7 +421,7 @@ const datosWeb = {
                 </div>
                 <div class="text-center">
                     <div class="text-2xl sm:text-4xl font-bold grad-orange mb-1 sm:mb-2">±0.1mm</div>
-                    <div class="text-gray-300 text-xs sm:text-base leading-tight">Precisión<br class="block sm:hidden"> Industrial</div>
+                    <div class="text-gray-300 text-xs sm:text-base leading-tight">Precisión<br class="block sm:hidden"> Diseño 3D</div>
                 </div>
             </div>
             
@@ -463,7 +463,7 @@ const datosWeb = {
                         <li class="flex items-center text-gray-300"><div class="w-1.5 h-1.5 rounded-full bg-cyan-400 mr-3"></div><span class="text-sm">Fibra de Carbono</span></li>
                         <li class="flex items-center text-gray-300"><div class="w-1.5 h-1.5 rounded-full bg-cyan-400 mr-3"></div><span class="text-sm">Nylon PA12</span></li>
                         <li class="flex items-center text-gray-300"><div class="w-1.5 h-1.5 rounded-full bg-cyan-400 mr-3"></div><span class="text-sm">TPU Flexible</span></li>
-                        <li class="flex items-center text-gray-300"><div class="w-1.5 h-1.5 rounded-full bg-cyan-400 mr-3"></div><span class="text-sm">PETG Industrial</span></li>
+                        <li class="flex items-center text-gray-300"><div class="w-1.5 h-1.5 rounded-full bg-cyan-400 mr-3"></div><span class="text-sm">PETG </span></li>
                         <li class="flex items-center text-gray-300"><div class="w-1.5 h-1.5 rounded-full bg-cyan-400 mr-3"></div><span class="text-sm">Y más Materiales</span></li>
                     </ul>
             
@@ -664,9 +664,10 @@ const datosWeb = {
         <div class="flex flex-wrap items-center justify-center gap-3 mb-8">
             <button onclick="filterPortfolio('Todos')" id="filter-Todos" class="filter-btn px-6 py-2.5 rounded-xl font-medium transition-all duration-300 bg-gradient-to-r from-cyan-400 to-orange-400 text-white shadow-lg shadow-cyan-400/30 scale-105">Todos</button>
             <button onclick="filterPortfolio('Ingeniería')" id="filter-Ingeniería" class="filter-btn px-6 py-2.5 rounded-xl font-medium transition-all duration-300 bg-gray-800/50 text-gray-400 border border-gray-700/50 hover:border-cyan-400/50 hover:text-cyan-300">Ingeniería</button>
-            <button onclick="filterPortfolio('Industrial')" id="filter-Industrial" class="filter-btn px-6 py-2.5 rounded-xl font-medium transition-all duration-300 bg-gray-800/50 text-gray-400 border border-gray-700/50 hover:border-cyan-400/50 hover:text-cyan-300">Industrial</button>
-            <button onclick="filterPortfolio('Diseño')" id="filter-Diseño" class="filter-btn px-6 py-2.5 rounded-xl font-medium transition-all duration-300 bg-gray-800/50 text-gray-400 border border-gray-700/50 hover:border-cyan-400/50 hover:text-cyan-300">Diseño</button>
-            <button onclick="filterPortfolio('Arte')" id="filter-Arte" class="filter-btn px-6 py-2.5 rounded-xl font-medium transition-all duration-300 bg-gray-800/50 text-gray-400 border border-gray-700/50 hover:border-cyan-400/50 hover:text-cyan-300">Arte</button>
+            <button onclick="filterPortfolio('Diseño 3D')" id="filter-Diseño 3D" class="filter-btn px-6 py-2.5 rounded-xl font-medium transition-all duration-300 bg-gray-800/50 text-gray-400 border border-gray-700/50 hover:border-cyan-400/50 hover:text-cyan-300">Diseño 3D</button>
+            <button onclick="filterPortfolio('Personalizado')" id="filter-Personalizado" class="filter-btn px-6 py-2.5 rounded-xl font-medium transition-all duration-300 bg-gray-800/50 text-gray-400 border border-gray-700/50 hover:border-cyan-400/50 hover:text-cyan-300">Personalizado</button>
+            <button onclick="filterPortfolio('Hogar')" id="filter-Hogar" class="filter-btn px-6 py-2.5 rounded-xl font-medium transition-all duration-300 bg-gray-800/50 text-gray-400 border border-gray-700/50 hover:border-cyan-400/50 hover:text-cyan-300">Hogar</button>
+            <button onclick="filterPortfolio('Maquetas')" id="filter-Hogar" class="filter-btn px-6 py-2.5 rounded-xl font-medium transition-all duration-300 bg-gray-800/50 text-gray-400 border border-gray-700/50 hover:border-cyan-400/50 hover:text-cyan-300">Maquetas</button>
         </div>
         <p class="text-center text-sm text-gray-400 mb-8">← Desliza para ver más proyectos →</p>
     </div>
@@ -753,7 +754,7 @@ const datosWeb = {
                 <div class="absolute top-0 left-0 right-0 h-1 bg-lime-500/40"></div>
                 <div>
                     <div class="flex justify-between items-center mb-4">
-                        <h3 class="text-white font-bold text-xl tracking-wide">Industrial</h3>
+                        <h3 class="text-white font-bold text-xl tracking-wide">Diseño 3D</h3>
                         <span class="text-xs font-mono text-lime-400 bg-lime-500/10 px-3 py-1 rounded">A Medida</span>
                     </div>
                     <div class="text-3xl sm:text-4xl font-bold text-white mb-6 font-mono">
@@ -767,7 +768,7 @@ const datosWeb = {
                         <li class="flex items-center"><span class="w-1.5 h-1.5 rounded-full bg-lime-400 mr-3 flex-shrink-0"></span>Soporte de ingeniería CAD</li>
                     </ul>
                 </div>
-                <button onclick="openWhatsApp('¡Hola! Necesito consultar un proyecto de tipo Industrial / Serie corta para mi empresa.')" class="w-full py-3.5 rounded-xl bg-gray-900 hover:bg-lime-500/20 border border-lime-500/30 text-lime-300 font-semibold transition-all text-sm tracking-wide text-center">
+                <button onclick="openWhatsApp('¡Hola! Necesito consultar un proyecto de tipo Diseño 3D / Serie corta para mi empresa.')" class="w-full py-3.5 rounded-xl bg-gray-900 hover:bg-lime-500/20 border border-lime-500/30 text-lime-300 font-semibold transition-all text-sm tracking-wide text-center">
                     Contactar Ingeniería →
                 </button>
             </div>
