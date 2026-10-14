@@ -55,26 +55,71 @@
         ::-webkit-scrollbar-track{background:#0a0a0a}
         ::-webkit-scrollbar-thumb{background:linear-gradient(180deg,#06b6d4,#f97316);border-radius:5px}
         
-        .carousel-container{
-            overflow-x:auto;
-            scroll-behavior:smooth;
-            scrollbar-width:none;
-            -ms-overflow-style:none;
-            scroll-snap-type:x mandatory;
-        }
-        .carousel-container::-webkit-scrollbar{display:none}
-        .carousel-container{
-    overflow-x:auto;
-    scroll-behavior:smooth;
-    scrollbar-width:none;
-    -ms-overflow-style:none;
-    scroll-snap-type:x mandatory;
-    scroll-padding-left: 4.5rem; /* Evita que al deslizar se esconda bajo la flecha izquierda */
+       .carousel-container {
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    scroll-snap-type: x mandatory;
+    padding-left: 3.5rem !important;
+    padding-right: 2rem !important;
 }
-.carousel-container::-webkit-scrollbar{display:none}
-.carousel-item{scroll-snap-align:center}
 @media (min-width: 640px) {
-    .carousel-item{scroll-snap-align:start}
+    .carousel-container {
+        padding-left: 5rem !important;
+        padding-right: 5rem !important;
+    }
+}
+.carousel-container::-webkit-scrollbar { display: none; }
+.carousel-item { scroll-snap-align: center; }
+@media (min-width: 640px) {
+    .carousel-item { scroll-snap-align: start; }
+}
+
+/* Visor flotante por encima de TODO */
+#imageLightbox {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(3, 7, 18, 0.85);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 99999 !important; /* Garantiza que esté por delante de todo */
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    opacity: 0;
+    transition: opacity 0.25s ease;
+}
+#imageLightbox.activo {
+    display: flex;
+    opacity: 1;
+}
+.lightbox-card {
+    background: #111827;
+    border: 1px solid rgba(6, 182, 212, 0.35);
+    border-radius: 20px;
+    padding: 16px;
+    max-width: 520px; /* Tamaño medio elegante, no ocupa toda la pantalla */
+    width: 92%;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.9);
+    position: relative;
+    text-align: center;
+    transform: scale(0.95);
+    transition: transform 0.25s ease;
+}
+#imageLightbox.activo .lightbox-card {
+    transform: scale(1);
+}
+.lightbox-card img {
+    width: 100%;
+    max-height: 55vh; /* Altura controlada para que se vea entera y proporcionada */
+    object-fit: contain;
+    border-radius: 12px;
+    background: #090d16;
 }
         
         .mobile-menu{display:none}
@@ -1113,21 +1158,13 @@ document.getElementById('form-imagenes').addEventListener('submit', async functi
     </div>
 </footer> 
 
-<!-- MODAL LIGHTBOX PARA VER IMÁGENES COMPLETAS SIN RECORTE -->
-<div id="imageLightbox" class="fixed inset-0 z-[100] hidden bg-black/90 backdrop-blur-md flex items-center justify-center p-4 sm:p-8 opacity-0 transition-opacity duration-300" onclick="closeLightbox()">
-    <div class="relative max-w-5xl w-full flex flex-col items-center justify-center" onclick="event.stopPropagation()">
-        <!-- Botón cerrar -->
-        <button onclick="closeLightbox()" aria-label="Cerrar imagen" class="absolute -top-12 right-0 sm:right-4 text-gray-300 hover:text-cyan-400 transition-colors p-2 bg-gray-900/80 rounded-full border border-gray-700">
-            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
-        </button>
-        
-        <!-- Imagen completa sin recorte (object-contain) -->
-        <img id="lightboxImg" src="" alt="" class="max-h-[75vh] sm:max-h-[80vh] w-auto max-w-full object-contain rounded-2xl border border-cyan-500/30 shadow-[0_0_50px_rgba(6,182,212,0.2)] bg-gray-950">
-        
-        <!-- Título y Material debajo de la foto -->
-        <div class="mt-4 text-center bg-gray-900/90 border border-gray-800 px-6 py-2.5 rounded-full backdrop-blur-sm">
-            <h4 id="lightboxTitle" class="text-lg sm:text-xl font-bold text-white inline mr-3"></h4>
-            <span id="lightboxMaterial" class="text-xs sm:text-sm text-cyan-400 font-mono px-2.5 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20"></span>
+<!-- VISOR FLOTANTE CENTRADO -->
+<div id="imageLightbox" onclick="closeLightbox()">
+    <div class="lightbox-card" onclick="event.stopPropagation()">
+        <img id="lightboxImg" src="" alt="">
+        <div class="mt-4 flex items-center justify-between px-2">
+            <h4 id="lightboxTitle" class="text-lg font-bold text-white"></h4>
+            <span id="lightboxMaterial" class="text-xs font-semibold text-cyan-300 bg-cyan-500/10 border border-cyan-500/30 px-3 py-1 rounded-full"></span>
         </div>
     </div>
 </div>
@@ -1147,40 +1184,26 @@ document.getElementById('form-imagenes').addEventListener('submit', async functi
     <script>
 document.addEventListener("DOMContentLoaded", () => {
     
-    // 1. Función que dibuja las tarjetas del Portfolio (Corregida y con Lightbox)
+   // 1. Función que dibuja las tarjetas del Portfolio (Diseño limpio original + clic para abrir)
     const portContainer = document.getElementById('portfolioCarousel');
     function pintarPortfolio(lista) {
         portContainer.innerHTML = lista.map(p => `
-            <div class="carousel-item flex-shrink-0 w-[82%] sm:w-[45%] lg:w-[30%]" data-category="${p.categoria}" style="max-width: 360px;">
-                <div onclick="openLightbox('${p.imagen}', '${p.titulo}', '${p.material}')" class="cursor-pointer group relative overflow-hidden rounded-2xl border border-${p.colorCSS}-400/40 bg-gray-900/60 backdrop-blur-sm hover:scale-[1.03] transition-all duration-500 hover:shadow-${p.colorCSS}-400/30 hover:shadow-2xl w-full h-full flex flex-col justify-between">
-                    <div class="relative aspect-[4/3] w-full overflow-hidden bg-[#0a0d14] flex items-center justify-center p-2">
-                        <!-- Usamos object-contain para que NO recorte tus fotos, con un fondo oscuro elegante -->
-                        <img src="${p.imagen}" alt="${p.titulo}" loading="lazy" class="w-full h-full object-contain rounded-xl group-hover:scale-105 transition-transform duration-500">
-                        
-                        <div class="absolute inset-0 bg-gradient-to-t from-gray-950 via-transparent to-transparent opacity-60 pointer-events-none"></div>
-                        <div class="absolute top-3 right-3 px-3 py-1 rounded-full bg-gray-950/80 backdrop-blur-md border border-${p.colorCSS}-400/40 text-xs font-semibold text-${p.colorCSS}-300">${p.categoria}</div>
-                        
-                        <!-- Icono de ampliar al pasar el ratón o en móvil -->
-                        <div class="absolute bottom-3 right-3 bg-gray-950/80 border border-white/15 p-2 rounded-xl text-white opacity-80 sm:opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-lg">
-                            <svg class="w-4 h-4 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg>
-                        </div>
+            <div class="carousel-item flex-shrink-0 w-[85%] sm:w-[45%] lg:w-[30%]" data-category="${p.categoria}" style="max-width: 360px;">
+                <div onclick="openLightbox('${p.imagen}', '${p.titulo}', '${p.material}')" class="cursor-pointer group relative overflow-hidden rounded-2xl border border-${p.colorCSS}-400/40 bg-gray-900/50 backdrop-blur-sm hover:scale-105 transition-all duration-500 hover:shadow-${p.colorCSS}-400/40 hover:shadow-2xl w-full">
+                    <div class="relative aspect-[4/3] w-full overflow-hidden bg-gradient-to-br from-gray-800 to-gray-900">
+                        <img src="${p.imagen}" alt="${p.titulo}" loading="lazy" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-gray-950 via-gray-950/20 to-transparent opacity-60"></div>
+                        <div class="absolute top-4 right-4 px-3 py-1 rounded-full bg-gray-950/80 backdrop-blur-sm border border-${p.colorCSS}-400/40 text-xs font-semibold text-${p.colorCSS}-300">${p.categoria}</div>
                     </div>
-                    <div class="p-5 bg-gray-950/90 border-t border-gray-800/80">
-                        <h3 class="text-lg sm:text-xl font-bold text-white mb-1.5 truncate">${p.titulo}</h3>
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-center space-x-2">
-                                <svg class="w-4 h-4 text-${p.colorCSS}-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/></svg>
-                                <span class="text-sm text-gray-400">${p.material}</span>
-                            </div>
-                            <span class="text-xs text-cyan-400/80 group-hover:text-cyan-300 font-medium">Ver foto →</span>
-                        </div>
+                    <div class="p-5 flex items-center justify-between bg-gray-950/60">
+                        <h3 class="text-lg font-bold text-white truncate pr-2">${p.titulo}</h3>
+                        <span class="px-2.5 py-1 rounded-lg bg-gray-800/90 border border-gray-700 text-xs font-mono text-${p.colorCSS}-300 flex-shrink-0">${p.material}</span>
                     </div>
                 </div>
             </div>
         `).join('');
     }
     
-
     // Pintamos primero las de por defecto al instante
     pintarPortfolio(datosWeb.portfolio);
 
@@ -1234,20 +1257,18 @@ function openLightbox(imgSrc, title, material) {
     document.getElementById('lightboxImg').src = imgSrc;
     document.getElementById('lightboxImg').alt = title;
     document.getElementById('lightboxTitle').textContent = title;
-    document.getElementById('lightboxMaterial').textContent = 'Material: ' + material;
+    document.getElementById('lightboxMaterial').textContent = material;
     
-    lightbox.classList.remove('hidden');
-    setTimeout(() => lightbox.classList.remove('opacity-0'), 10);
-    document.body.style.overflow = 'hidden'; // Evita que la web haga scroll detrás
+    lightbox.classList.add('activo');
+    document.body.style.overflow = 'hidden';
 }
 
 function closeLightbox() {
     const lightbox = document.getElementById('imageLightbox');
-    lightbox.classList.add('opacity-0');
+    lightbox.classList.remove('activo');
     setTimeout(() => {
-        lightbox.classList.add('hidden');
         document.getElementById('lightboxImg').src = '';
-    }, 300);
+    }, 250);
     document.body.style.overflow = '';
 }
 
