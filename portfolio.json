@@ -1,5 +1,33 @@
 [
   {
+    "imagen": "img/Personalizado_PETG_LLavero Buceo.webp",
+    "titulo": "LLavero Buceo",
+    "material": "PETG",
+    "categoria": "Personalizado",
+    "colorCSS": "purple"
+  },
+  {
+    "imagen": "img/Diseno 3D_PETG_Soporte Muro.webp",
+    "titulo": "Soporte Muro",
+    "material": "PETG",
+    "categoria": "Diseño 3D",
+    "colorCSS": "orange"
+  },
+  {
+    "imagen": "img/Diseno 3D_PETG_LogoAviacion.webp",
+    "titulo": "LogoAviacion",
+    "material": "PETG",
+    "categoria": "Diseño 3D",
+    "colorCSS": "orange"
+  },
+  {
+    "imagen": "img/Diseno 3D _PETG_LLavero.webp",
+    "titulo": "LLavero",
+    "material": "PETG",
+    "categoria": "Diseño 3D",
+    "colorCSS": "orange"
+  },
+  {
     "imagen": "img/Personalizado_TPU_Funda Gafas.webp",
     "titulo": "Funda Gafas",
     "material": "TPU",
