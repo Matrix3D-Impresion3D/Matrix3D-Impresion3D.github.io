@@ -1,5 +1,12 @@
 [
   {
+    "imagen": "img/Hogar_PETG_Lampara.webp",
+    "titulo": "Lampara",
+    "material": "PETG",
+    "categoria": "Hogar",
+    "colorCSS": "lime"
+  },
+  {
     "imagen": "img/Personalizado_PETG_Pulpo Articulado.webp",
     "titulo": "Pulpo Articulado",
     "material": "PETG",
