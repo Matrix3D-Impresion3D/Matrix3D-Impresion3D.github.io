@@ -1,5 +1,12 @@
 [
   {
+    "imagen": "img/Diseno 3D_PETG_Secador Botella.webp",
+    "titulo": "Secador Botella",
+    "material": "PETG",
+    "categoria": "Diseño 3D",
+    "colorCSS": "orange"
+  },
+  {
     "imagen": "img/Hogar_PETG_Lampara.webp",
     "titulo": "Lampara",
     "material": "PETG",
