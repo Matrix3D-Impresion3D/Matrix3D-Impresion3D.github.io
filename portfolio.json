@@ -1,12 +1,47 @@
 [
   {
+    "imagen": "img/Personalizado_PETG_Pulpo Articulado.webp",
+    "titulo": "Pulpo Articulado",
+    "material": "PETG",
+    "categoria": "Personalizado",
+    "colorCSS": "purple"
+  },
+  {
+    "imagen": "img/Personalizado_PETG_Pedal a medida.webp",
+    "titulo": "Pedal a medida",
+    "material": "PETG",
+    "categoria": "Personalizado",
+    "colorCSS": "purple"
+  },
+  {
+    "imagen": "img/Personalizado_PETG_Cajon Nevera.webp",
+    "titulo": "Cajon Nevera",
+    "material": "PETG",
+    "categoria": "Personalizado",
+    "colorCSS": "purple"
+  },
+  {
+    "imagen": "img/Hogar_PLA_Organizador.webp",
+    "titulo": "Organizador",
+    "material": "PLA",
+    "categoria": "Hogar",
+    "colorCSS": "lime"
+  },
+  {
+    "imagen": "img/Hogar_PLA_Caja Segura.webp",
+    "titulo": "Caja Segura",
+    "material": "PLA",
+    "categoria": "Hogar",
+    "colorCSS": "lime"
+  },
+  {
     "imagen": "img/Diseno 3D_PETG_LogoAviacion.webp",
     "titulo": "LogoAviacion",
     "material": "PETG",
     "categoria": "Diseño 3D",
     "colorCSS": "orange"
   },
-    {
+  {
     "imagen": "img/Hogar_PLA_Organizador Personalizado..webp",
     "titulo": "Organizador Personalizado.",
     "material": "PLA",
@@ -34,14 +69,14 @@
     "categoria": "Personalizado",
     "colorCSS": "purple"
   },
-    {
+  {
     "imagen": "img/Hogar_PETG_Accesorios Dyson.webp",
     "titulo": "Accesorios Dyson",
     "material": "PETG",
     "categoria": "Hogar",
     "colorCSS": "lime"
   },
-   {
+  {
     "imagen": "img/Maqueta_PLA_Singapur.webp",
     "titulo": "Singapur",
     "material": "PLA",
@@ -76,7 +111,7 @@
     "categoria": "Maquetas",
     "colorCSS": "cyan"
   },
-   {
+  {
     "imagen": "img/Personalizado_PETG_LLavero Buceo.webp",
     "titulo": "LLavero Buceo",
     "material": "PETG",
@@ -90,7 +125,7 @@
     "categoria": "Maquetas",
     "colorCSS": "cyan"
   },
-    {
+  {
     "imagen": "img/Diseno 3D_PETG_Soporte Muro.webp",
     "titulo": "Soporte Muro",
     "material": "PETG",
